@@ -39,9 +39,10 @@ function verif (link) {
     }
 
     if (/^https:\/\/www\.faceit\.com\/[a-z]{2}\/championship\/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/.test(link)) {
+        get_html(link);
         const msg = document.createElement('p');
         msg.className = "result good";
-        msg.textContent = "Processing...";
+        msg.textContent = "Getting the html source code...";
         input.appendChild(msg);
     } else {
         const msg = document.createElement('p');
@@ -49,4 +50,44 @@ function verif (link) {
         msg.textContent = "There is a mistake in the link.";
         input.appendChild(msg);
     }
+}
+
+function get_html(link) {
+        
+    const input = document.querySelector('.input');
+
+    $.ajax({
+        url : link,
+        dataType : 'html',
+        success : (code_html, statut) =>  {
+            process(code_html)
+            
+            // Delete the old message
+            const oldmsg = document.querySelector('.result');
+            input.removeChild(oldmsg);
+
+            // Adding the new message
+            const msg = document.createElement('p');
+            msg.className = "result good";
+            msg.textContent = `Processing..`;
+            input.appendChild(msg);
+        },
+        error : (res, statut, error) => {
+            console.error(error)
+            
+            // Delete the old message
+            const oldmsg = document.querySelector('.result');
+            input.removeChild(oldmsg);
+
+            // Adding the new message
+            const msg = document.createElement('p');
+            msg.className = "result bad";
+            msg.textContent = `Error when trying to get the html source code :/`;
+            input.appendChild(msg);
+        }
+    });
+}
+
+function process(code) {
+    console.log(code);
 }
