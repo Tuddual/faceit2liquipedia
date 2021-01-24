@@ -4,19 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./src/index.js"
+    "start": "live-server --open=\"src/\""
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Tuddual/faceit2liquipedia.git"
   },
-  "author": "",
+  "author": "Tudual Quinio (tud)",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Tuddual/faceit2liquipedia/issues"
   },
   "homepage": "https://github.com/Tuddual/faceit2liquipedia#readme",
   "devDependencies": {
-    "eslint": "^7.18.0"
-  }
+    "eslint": "^7.18.0",
+    "live-server": "^1.2.1"
+  },
+  "dependencies": {}
 }
