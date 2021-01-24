@@ -1,0 +1,22 @@
+{
+  "name": "faceit2liquipedia",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tuddual/faceit2liquipedia.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tuddual/faceit2liquipedia/issues"
+  },
+  "homepage": "https://github.com/Tuddual/faceit2liquipedia#readme",
+  "devDependencies": {
+    "eslint": "^7.18.0"
+  }
+}
