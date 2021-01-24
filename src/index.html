@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
         <title>Faceit to liquipedia by tud</title>
-        <script type="text/javascript" src="index.js"></script>
+        <script defer type="text/javascript" src="index.js"></script>
         <link rel="stylesheet" href="style.css">
         <link rel="icon" type="image/png" href="./icon/liquipedia_logo.png">
     </head>
@@ -14,30 +14,30 @@
 
         <div class="input divstyle">
             <h2>Enter the bracket link tournament here :</h2>
-            <button
-                title="Paste"
-            >
+            <button class="paste" title="Paste">
                 <img
                     src="./icon/paste.svg"
                     alt="Paste"
                     width="25px"
                 />
             </button>
-            <input type="text" placeholder="https://www.faceit.com/en/championship/...">
+            <input
+                class="input"
+                type="text"
+                placeholder="https://www.faceit.com/en/championship/..."
+            >
         </div>
 
         <div class="output divstyle">
             <h2>Output :</h2>
-            <button
-                title="Copy"
-            >
+            <button class="copy" title="Copy">
                 <img
                     src="./icon/copy.svg"
                     alt="Copy"
                     width="25px"
                 />
             </button>
-            <pre>Code</pre>
+            <pre class="code">Code</pre>
         </div>
 
         <p>Website coded by <a href="https://twitter.com/Tuddual">tud</a> (<a href="https://github.com/Tuddual/faceit2liquipedia">source code</a>) - report issues <a href="https://github.com/Tuddual/faceit2liquipedia/issues">here</a></p>
