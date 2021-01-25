@@ -20,5 +20,7 @@
     "eslint": "^7.18.0",
     "live-server": "^1.2.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  }
 }

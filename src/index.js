@@ -1,3 +1,4 @@
+import cst from "./config.js";
 
 // Paste
 const btn_paste = document.querySelector('.paste');
@@ -39,10 +40,10 @@ function verif (link) {
     }
 
     if (/^https:\/\/www\.faceit\.com\/[a-z]{2}\/championship\/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/.test(link)) {
-        get_html(link);
         const msg = document.createElement('p');
         msg.className = "result good";
-        msg.textContent = "Getting the html source code...";
+        msg.textContent = "Fetching Faceit API...";
+        get_json(link);
         input.appendChild(msg);
     } else {
         const msg = document.createElement('p');
@@ -52,42 +53,45 @@ function verif (link) {
     }
 }
 
-function get_html(link) {
-        
-    const input = document.querySelector('.input');
+async function get_json(link) {
 
-    $.ajax({
-        url : link,
-        dataType : 'html',
-        success : (code_html, statut) =>  {
-            process(code_html)
-            
-            // Delete the old message
-            const oldmsg = document.querySelector('.result');
-            input.removeChild(oldmsg);
-
-            // Adding the new message
-            const msg = document.createElement('p');
-            msg.className = "result good";
-            msg.textContent = `Processing..`;
-            input.appendChild(msg);
-        },
-        error : (res, statut, error) => {
-            console.error(error)
-            
-            // Delete the old message
-            const oldmsg = document.querySelector('.result');
-            input.removeChild(oldmsg);
-
-            // Adding the new message
-            const msg = document.createElement('p');
-            msg.className = "result bad";
-            msg.textContent = `Error when trying to get the html source code :/`;
-            input.appendChild(msg);
+    const res = await fetch(`https://open.faceit.com/data/v4/championships/${link.slice(39, 75)}/subscriptions?offset=0&limit=10`, {
+        headers: {
+            'accept': 'application/json',
+            'Authorization': `Bearer ${cst.FACEIT_API_KEY}`
         }
     });
+
+    // Delete the old message
+    const input = document.querySelector('.input');
+    const oldmsg = document.querySelector('.result');
+    input.removeChild(oldmsg);
+
+    if (res.ok) {
+
+        const data = await res.json();
+
+        // Adding the new message
+        const msg = document.createElement('p');
+        msg.className = "result good";
+        msg.textContent = `Processing..`;
+        input.appendChild(msg);
+
+        process(data);
+
+    } else {
+
+        // Adding the new message
+        const msg = document.createElement('p');
+        msg.className = "result bad";
+        msg.textContent = `Error (${res.status}) when trying to fetch the Faceit API !`;
+        input.appendChild(msg);
+
+    }
 }
 
 function process(code) {
-    console.log(code);
+
+    const pre = document.querySelector('.code');
+    pre.innerHTML = code
 }
