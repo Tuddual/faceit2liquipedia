@@ -1,7 +1,7 @@
 {
   "name": "faceit2liquipedia",
   "version": "0.0.1",
-  "description": "",
+  "description": "Generate R6 liquipedia bracket",
   "main": "index.js",
   "scripts": {
     "start": "live-server --open=\"src/\""
@@ -17,10 +17,10 @@
   },
   "homepage": "https://github.com/Tuddual/faceit2liquipedia#readme",
   "devDependencies": {
-    "eslint": "^7.18.0",
-    "live-server": "^1.2.1"
+    "eslint": "^7.18.0"
   },
   "dependencies": {
+    "live-server": "^1.2.1",
     "node-fetch": "^2.6.1"
   }
 }

@@ -78,6 +78,7 @@ pre {
     margin: 0px;
     border-radius: 10px;
     background-color: #121212;
+    overflow-x: hidden
 }
 
 p {
