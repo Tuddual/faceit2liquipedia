@@ -1,5 +1,3 @@
-import cst from "./config.js";
-
 // Paste
 const btn_paste = document.querySelector('.paste');
 
@@ -32,71 +30,60 @@ input.addEventListener('input', async () => {
 function verif (link) {
 
     const input = document.querySelector('.input');
-
-    // Delete the old message
     const oldmsg = document.querySelector('.result');
-    if (oldmsg) {
-        input.removeChild(oldmsg);
-    }
+    if (oldmsg) input.removeChild(oldmsg);
 
     if (/^https:\/\/www\.faceit\.com\/[a-z]{2}\/championship\/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/.test(link)) {
+
         const msg = document.createElement('p');
         msg.className = "result good";
         msg.textContent = "Fetching Faceit API...";
-        get_json(link);
         input.appendChild(msg);
+
+        fetching(link.slice(39, 75));
+
     } else {
         const msg = document.createElement('p');
-        msg.className = "result bad";
         msg.textContent = "There is a mistake in the link.";
+        msg.className = "result bad";
         input.appendChild(msg);
     }
 }
 
-async function get_json(link) {
+async function fetching(id) {
 
-    const res = await fetch(`https://open.faceit.com/data/v4/championships/${link.slice(39, 75)}/matches?offset=0&limit=32`, {
-        headers: {
-            'accept': 'application/json',
-            'Authorization': `Bearer ${cst.FACEIT_API_KEY}`
-        }
-    });
+    const url = window.location.href;
 
-    // Delete the old message
+    const res1 = await fetch(url + 'faceit/standing/' + id)
+    const res2 = await fetch(url + 'faceit/bracket/' + id)
+
     const input = document.querySelector('.input');
     const oldmsg = document.querySelector('.result');
     input.removeChild(oldmsg);
 
-    if (res.ok) {
 
-        const data = await res.json();
+    if (res1.ok && res2.ok) {
 
-        // Adding the new message
         const msg = document.createElement('p');
         msg.className = "result good";
         msg.textContent = `Processing..`;
         input.appendChild(msg);
 
-        process(data, link);
+        process(res1.data, res2.data);
 
     } else {
-
-        // Adding the new message
         const msg = document.createElement('p');
         msg.className = "result bad";
-        msg.textContent = `Error (${res.status}) when trying to fetch the Faceit API !`;
+        msg.textContent = `Error (${res1.ok?res2.status:res1.status}) when trying to fetch the Faceit API !`;
         input.appendChild(msg);
-
     }
+
 }
 
-function process(data, link) {
-
-    console.log(data)
-
+function process(data1, data2) {
 
     let text = `===Playoffs===\n`;
-    text += `:''See all bracket at [${link.slice(0, 76)}/standings/column].''\n\n`;
+    text += `:''See all bracket at [test/standings/column].''\n\n`;
     text += `{{32SETeamBracket\n`;
     text += `&lt;!-- ROUND OF 32 --&gt;\n`;
     text += `|R1D1team= |R1D1score= |R1D1win=\n`;

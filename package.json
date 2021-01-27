@@ -2,9 +2,9 @@
   "name": "faceit2liquipedia",
   "version": "0.0.1",
   "description": "Generate R6 liquipedia bracket",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "live-server --open=\"src/\""
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -20,7 +20,7 @@
     "eslint": "^7.18.0"
   },
   "dependencies": {
-    "live-server": "^1.2.1",
+    "express": "^4.17.1",
     "node-fetch": "^2.6.1"
   }
 }
