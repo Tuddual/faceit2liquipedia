@@ -2,12 +2,85 @@
 
 function reformat_32SE(bracket, seed) {
 
+    let result = {};
+
+    const start_round = seed.payload.rounds.length - 5;
+    for (let r = 0; r < 5; r++) {
+        for (let g = 0; g < seed.payload.rounds[start_round + r].matches.length; g++) {
+            result[`R${r+1}G${g+1}`] = {};
+            result[`R${r+1}G${g+1}`].id = seed.payload.rounds[start_round + r].matches[g];
+        }
+    }
+
+    const matches = seed.payload.matches;
+    const names = Object.keys(result);
+    for (const name of names) {
+        const status = matches[result[name].id].status;
+
+        switch (status) {
+            case "finished":
+                result[name].finished = "true";
+                result[name].originId = matches[result[name].id].originId;
+                if (matches[result[name].id].factions[0].entity.id === "bye") {
+                    result[name].team1 = "bye";
+                    result[name].team2 = matches[result[name].id].factions[1].entity.name;
+                    result[name].win2 = "1";
+
+                } else if (matches[result[name].id].factions[1].entity.id === "bye") {
+                    result[name].team1 = matches[result[name].id].factions[0].entity.name;
+                    result[name].win1 = "1";
+                    result[name].team2 = "bye";
+                    
+                } else {
+                    result[name].team1 = matches[result[name].id].factions[0].entity.name;
+                    result[name].win1 = "1" && matches[result[name].id].factions[0].winner;
+                    result[name].team2 = matches[result[name].id].factions[1].entity.name;
+                    result[name].win2 = "1" && matches[result[name].id].factions[1].winner;
+                }
+                break;
+            case "created":
+                result[name].originId = matches[result[name].id].originId;
+                result[name].team1 = matches[result[name].id].factions[0].entity.name;
+                result[name].team2 = matches[result[name].id].factions[1].entity.name;
+                break;
+        }
+    }
+
+    for (const match of bracket.items) {
+
+        const i = names.findIndex(name => result[name].originId === match.match_id);
+
+        if (i != -1) {
+
+            const match_name = Object.keys(result)[i]
+
+            const swap = result[match_name].team1 != match.teams.faction1.name
+            console.log(swap);
+
+            if (match.hasOwnProperty("map") && match.map.hasOwnProperty("pick")) {
+                result[match_name].map = match.voting.map.pick
+            }
+            result[match_name].faceit = `match-${result[match_name].originId}`
+            if (match.hasOwnProperty("results")) {
+                if (!swap) {
+                    result[match_name].score1 = match.results.score.faction1
+                    result[match_name].score2 = match.results.score.faction2
+                } else {
+                    result[match_name].score1 = match.results.score.faction2
+                    result[match_name].score2 = match.results.score.faction1
+                }
+            }
+        }
+    }
+
+    return result
+
 }
 
-function bracket_32SE(id, result) {
+function bracket_32SE(id, res) {
 
     let text = `===Playoffs===\n`;
-    text += `:''See all bracket at [test/standings/column].''\n\n`;
+    text += `:''See all bracket at [https://www.faceit.com/en/championship/${id}//standings/column].''\n\n`;
     text += `{{32SETeamBracket\n`;
     text += `&lt;!-- ROUND OF 32 --&gt;\n`;
     text += `|R1D1team= |R1D1score= |R1D1win=\n`;
