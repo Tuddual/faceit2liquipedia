@@ -43,4 +43,18 @@ router.get("/bracket/:id", async function(req, res) {
     });
 });
 
+router.get("/seed/:id", async function(req, res) {
+
+    const response = await fetch(`https://api.faceit.com/championships/v1/championship/${req.params.id}/group/1/bracket`);
+
+    if (!response.ok) res.send(response);
+
+    const data = await response.json();
+
+    res.send({
+        ok: true,
+        data: data
+    });
+});
+
 module.exports = router;
