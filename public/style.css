@@ -11,10 +11,13 @@ h1 {
 }
 
 .divstyle {
+    max-width: min(1000px, 90%);
     background-color: #1e1e1e;
     border-radius: 16px;
     padding: 16px;
     margin: 10px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 h2 {
