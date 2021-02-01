@@ -72,7 +72,11 @@ async function fetching(id) {
         msg.textContent = `Processing..`;
         input.appendChild(msg);
 
-        process(id, res1.data, res2.data, res3.data);
+        const data1 = await res1.json();
+        const data2 = await res2.json();
+        const data3 = await res3.json();
+
+        process(id, data1.data, data2.data, data3.data);
 
     } else {
         const msg = document.createElement('p');
