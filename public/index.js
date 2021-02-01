@@ -1,5 +1,4 @@
 'use strict';
-const liquipedia = require("./liquipedia");
 
 // Paste
 const btn_paste = document.querySelector('.paste');
@@ -86,8 +85,8 @@ async function fetching(id) {
 
 function process(id, standing, bracket, seed) {
 
-    const result = liquipedia.reformat_32SE(bracket, seed);
-    const text = liquipedia.bracket_32SE(id, result);
+    const result = reformat_32SE(bracket, seed);
+    const text = bracket_32SE(id, result);
     
     const code = document.querySelector('.code');
     code.innerHTML = text

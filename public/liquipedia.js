@@ -1,10 +1,10 @@
 'use strict';
 
-exports.reformat_32SE = (bracket, seed) => {
+function reformat_32SE(bracket, seed) {
 
 }
 
-exports.bracket_32SE = () => {
+function bracket_32SE(id, result) {
 
     let text = `===Playoffs===\n`;
     text += `:''See all bracket at [test/standings/column].''\n\n`;
