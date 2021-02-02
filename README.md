@@ -1,7 +1,7 @@
 # faceit2liquipedia
 
 From an faceit link, it will generate you a bracket in liquipedia format !
-Only works for rainbow six tournament for now, if you need to be expend to other game please consider [create a new ssue](https://github.com/Tuddual/faceit2liquipedia/issues)
+Only works for rainbow six tournament for now, if you need to be expend to other game please consider [create a new issue](https://github.com/Tuddual/faceit2liquipedia/issues).
 
 ## Installation
 
@@ -17,7 +17,7 @@ If you have any problem with the instalation, please [create an issue](https://g
 
 ## Setting up
 
-* Creating an Faceit API key on the [Faceit Developer Portal](https://developers.faceit.com/) and copy it.
+* Creating an Faceit API key on the [Faceit Developer Portal](https://developers.faceit.com/apps) and copy it.
 
 * Put the bot API key in the `faceit2liquipedia/back/config.json` between the double quote.
 
