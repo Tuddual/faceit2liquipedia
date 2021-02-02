@@ -25,4 +25,4 @@ If you have any problem with the instalation, please [create an issue](https://g
 
 ### Running locally
 
-Once all the installation and setup step is done, launch the bot with `npm start`.
+Once all the installation and setup step is done, launch the project with `npm start`.
