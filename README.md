@@ -17,9 +17,9 @@ If you have any problem with the instalation, please [create an issue](https://g
 
 ## Setting up
 
-* Creating an Faceit API key on the [Faceit Developer Portal](https://developers.faceit.com/apps) and copy it.
+* Creating an Faceit API key on the [Faceit Developer Portal](https://developers.faceit.com/apps).
 
-* Put the bot API key in the `faceit2liquipedia/back/config.json` between the double quote.
+* Put the API key in the `faceit2liquipedia/back/config.json` between the double quote.
 
 ## Running the project
 
